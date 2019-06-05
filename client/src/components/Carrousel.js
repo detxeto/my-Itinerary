@@ -2,7 +2,7 @@ import React from 'react';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
-import bcn from '../Images/cities/bcn.jpg';
+import bcn from '../Images/cities/barcelona.jpg';
 import ams from '../Images/cities/amsterdam.jpg';
 import lis from '../Images/cities/lisboa.jpg';
 import ber from '../Images/cities/berlin.jpg';
@@ -23,7 +23,7 @@ import par from '../Images/cities/paris.jpg';
       slidesToShow: 2,
       slidesToScroll:2,
      
-      rows: 2,
+      rows: 1,
       slidesPerRow: 1,
       dots:true
       

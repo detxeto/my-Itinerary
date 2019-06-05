@@ -4,8 +4,8 @@ const City = require('../models/City');
 
 //get a list of object from the db
 router.get('/cities',function(req,res,next){
-    City.find({}).sort({city:1}).then(function(cities){
-        res.send(cities);
+    City.find({}).sort({city:1}).then(function(city){
+        res.send(city);
     })
 });
 //add a new object to th db

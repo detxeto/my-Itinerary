@@ -1,4 +1,10 @@
 import React from 'react';
+import {Button} from 'reactstrap';
+
+import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {getCities, deleteCity,addCity,} from '../actions/cityActions';
+import { PropTypes } from 'prop-types';
 
 
 
@@ -6,23 +12,21 @@ import React from 'react';
 
 
 class allCities extends React.Component{
-   constructor(props){
-       super(props);
+   constructor(){
+       super();
+     
        this.state={
-           items:[],
+        //    items:[],
            isLoaded:false,
-           cityFilter: ""
+           cityFilter: "",
+           
+           
        }
    }
    componentDidMount(){
-       fetch ('/api/cities')
-       .then(res => res.json())
-       .then(json => 
-            {this.setState({
-           isLoaded : true,
-           items :json,
-       })
-    });
+   
+    this.props.getCities();
+    console.log(this.props);
    }
    handleChange = (e) => {
     this.setState({
@@ -30,49 +34,86 @@ class allCities extends React.Component{
     })
     
   }
-
+ 
+  
     render (){
-        let { isLoaded } = this.state;
-      
+        
+       
+        const {cities} = this.props.city;
+       
         //let filteredCities = this.state.cities;
-        let filteredCities = this.state.items.filter(item => {
-          let cityName = item.city.toLowerCase();
-         
+        console.log({cities});
+        let filteredCities = cities.filter(city => {
+          let cityName = city.city.toLowerCase();
+          
           return cityName.startsWith(this.state.cityFilter.toLowerCase());
         });
-        if (!isLoaded){
-            return <div>Loading...</div>
-        }
-        
-        else{
+        // let { isLoaded } = this.props.city;
+        // if (!isLoaded){ 
+        //     return <div>Loadiing...</div>
+            
+        // }
+       
+        // else{
             return(
-                <div>
-                    <div><h3>Cities</h3></div>
-                    <div className="searchForm ">
+           <div>
+           
+           <div className="searchForm ">
                         
                         <form action="">
                             <div className="searchCityLabel"><label htmlFor="" >Filter our cuttent cities</label></div>
                             <div><input type="text" className="searchCityInput" placeholder="search..."value={this.state.cityFilter}
               onChange={this.handleChange}/> </div>
                         </form>
-                    </div>
-                    <div className="cityListAllDivs">
-                        {filteredCities.map((item) =>(
-                           <div key={item._id} className="cityListDiv">
-                               {item.city}
+                    </div>  
+                
+                
+                
+                
+                
+                
+                
+                
+                <div  >
+                        {filteredCities.map((city) =>(
+                            <div  key={city._id} className="cityListAllDivs"  > 
+                             <div outline color="secondary" className="cityListDiv  "  >  
+                           < Link to='./Itineraries' className='link'  >
+                               {city.city}
+                               </Link> 
+                             
+                               </div> 
+         
+                               
+                               
+                               
+                               
+                               
                                </div> 
                         ))}
-                    </div>
-
+                    
+                    
                 </div>
+            
+            
+           
+                             
+                </div>
+               
             );
-        }
-
-   
-
-
+        
+                        } 
 
 }
+
+allCities.propTypes ={
+    getCities: PropTypes.func.isRequired,
+    city: PropTypes.object.isRequired
 }
 
-export default allCities
+
+const mapStateToProps = (state)=> ({
+city: state.city
+});
+
+export default  connect(mapStateToProps,{getCities})(allCities);

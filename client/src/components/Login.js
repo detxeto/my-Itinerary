@@ -1,7 +1,7 @@
 import React from 'react';
 import ams from '../Images/cities/amsterdam.jpg';
-
-
+import MultipleRows from './Carrousel';
+import {Container}from 'reactstrap';
 
 
 const logIn=()=>{
@@ -11,9 +11,11 @@ const logIn=()=>{
 <div>   
     <h2>log in page</h2>
 </div>
-    <img src={ams} alt="amsterdam"className='CarouselImg' />
-
-
+<Container>
+   <div> <img src={ams} alt="amsterdam"className='CarouselImg' /></div>
+    
+    <MultipleRows/>
+    </Container>
 </div>
 
     )

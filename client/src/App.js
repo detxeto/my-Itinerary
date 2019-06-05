@@ -9,10 +9,15 @@ import Home from'./components/Home';
 import Footer from'./components/Footer';
 import Login from './components/Login';
 import CreateAccount from'./components/CreateAccount';
+import Itineraries from'./components/Itineraries';
 import './App.css';
+import {Provider} from 'react-redux';
+import store from './store';
+
 
 function App() {
   return (
+   <Provider store={store}>
    <BrowserRouter>
     < div className="App">
       <header className="App-header">
@@ -21,6 +26,7 @@ function App() {
       <Route path='/Cities'component={Cities}/>
       <Route path='/Login'component={Login}/>
       <Route path='/CreateAccount'component={CreateAccount}/>
+      <Route path='/Itineraries' component={Itineraries}/>
     
        <Footer />
         
@@ -28,6 +34,8 @@ function App() {
        </header>
       </div>
     </BrowserRouter>
+    </Provider>
+    
   )
 }
 
